@@ -41,7 +41,7 @@ export default function (options = {}) {
 
     const id = get(hook.params.user, options.idField);
 
-    if (id === undefined) {
+    if (id === undefined || id === null) {
       throw new Error(`'${options.idField} is missing from current user.'`);
     }
 
@@ -69,7 +69,7 @@ export default function (options = {}) {
         if (fieldArray.length === 0 || fieldArray.indexOf(id.toString()) < 0) {
           throw new errors.Forbidden('You do not have the permissions to access this.');
         }
-      } else if (field === undefined || field.toString() !== id.toString()) {
+      } else if (field === undefined || field === null || field.toString() !== id.toString()) {
         throw new errors.Forbidden('You do not have the permissions to access this.');
       }
 
